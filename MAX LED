@@ -1,0 +1,49 @@
+// https://www.youtube.com/watch?v=TLEgcSF8dps
+
+# include <SPI.h>
+
+void write_to_MAX7219(unsigned char addr, unsigned char data)
+{
+
+  delay(2);
+  digitalWrite(10,LOW);
+  SPI.transfer(addr);
+  SPI.transfer(data);
+  digitalWrite(10, HIGH);
+
+}
+
+void MAX7219_init()
+{
+  write_to_MAX7219(0x0c,0x01) ; // Normal Mode
+  write_to_MAX7219(0x09,0x00); // No Decode Mode
+  write_to_MAX7219(0x0A, 0x0D); // Intensity at 27/32
+  write_to_MAX7219(0x0B, 0x07); // use 8 digits for sinking current and muliplexing them 
+
+
+}
+
+void setup()
+{
+  SPI.begin();
+  pinMode(10,OUTPUT);
+  MAX7219_init();
+  delay(1000);
+
+
+}
+
+void loop()
+{
+  write_to_MAX7219(0x01,0x3C); // Digit 0
+  write_to_MAX7219(0x0c,0x01);
+  write_to_MAX7219(0x03,0x95); //
+  write_to_MAX7219(0x04,0xA1);
+  write_to_MAX7219(0x05,0xA1);
+  write_to_MAX7219(0x06,0x95);
+  write_to_MAX7219(0x07,0x42);
+  write_to_MAX7219(0x08,0x3C);
+
+
+
+}
