@@ -1,0 +1,30 @@
+// C++ code
+//
+
+// Pull down logic:
+//					- if button is not pressed, logic is 0 
+//					- if button is pressed, logic is 1
+
+void setup()
+{
+  // Switch Input
+  DDRD &= ~(1<<DDD2); // PD2 = configure too I/P
+  // Pin 13 LED Output 
+  DDRB |= (1<<DDB5); // PB5 = setting to O/P
+  
+
+}
+
+void loop()
+{
+  if(PIND & (1<<PIND2))	// if button is pressed/1 is true 
+     {
+       PORTB |= (1<<PB5);	// Trun on LED 
+     }
+   else // if if statement is FALSE, execute ELSE part of program 
+     {
+       PORTB &= ~(1<<PB5); // Turn off LED 
+     }
+  
+  
+}
